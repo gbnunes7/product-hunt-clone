@@ -31,7 +31,7 @@ const Header: React.FC = () => {
 				</span>
 				<InputSearch
 					autocomplete="off"
-					id="search"
+					id="searchproduct"
 					name="q"
 					type="text"
 					placeholder="Search"

@@ -1,6 +1,7 @@
 "use client";
 
 import CardProduct from "@/components/CardProduct";
+import CardProductReview from "@/components/CardProductReview";
 import FilterBanner from "@/components/FilterBanner";
 import ListItem from "@/components/ListItem";
 import Title from "@/components/Title";
@@ -13,6 +14,7 @@ export default function Home() {
 			descricao: "Camiseta de algodão com estampa criativa.",
 			tags: ["moda", "estampa", "algodão"],
 			likes: "150",
+			review: true,
 		},
 		{
 			id: 2,
@@ -20,6 +22,7 @@ export default function Home() {
 			descricao: "Tênis leve e confortável para corridas.",
 			tags: ["esporte", "corrida", "conforto"],
 			likes: "230",
+			review: true,
 		},
 		{
 			id: 3,
@@ -27,6 +30,7 @@ export default function Home() {
 			descricao: "Relógio inteligente com monitoramento de atividades.",
 			tags: ["tecnologia", "fitness", "wearable"],
 			likes: "320",
+			review: false,
 		},
 		{
 			id: 4,
@@ -34,6 +38,7 @@ export default function Home() {
 			descricao: "Mochila resistente ideal para trilhas e aventuras.",
 			tags: ["aventura", "mochila", "trilha"],
 			likes: "180",
+			review: false,
 		},
 		{
 			id: 5,
@@ -41,15 +46,19 @@ export default function Home() {
 			descricao: "Fones sem fio com cancelamento de ruído.",
 			tags: ["tecnologia", "audio", "sem fio"],
 			likes: "400",
+			review: true,
 		},
 	];
 
+	const productsReview = products.filter((product) => product.review);
+
 	products.sort((a, b) => Number(b.likes) - Number(a.likes));
+	productsReview.sort((a, b) => Number(b.likes) - Number(a.likes));
 
 	return (
 		<main className="px-4 flex flex-col flex-1 overflow-auto">
 			<FilterBanner />
-			<div className="flex ites-center justify-center my-8 border-b-[1px] pb-[15px]">
+			<div className="flex justify-center my-8 border-b-[1px] pb-[15px]">
 				<Title className="text-black font-bold text-2xl" level={1}>
 					Top Products
 				</Title>
@@ -66,11 +75,22 @@ export default function Home() {
 					</ListItem>
 				))}
 			</ul>
-			<div>
-				<Title level={3} className="text-black font-bold text-2xl">
-					Reviewed Products
-				</Title>
-			</div>
+			{productsReview.length > 0 && (
+				<div className="flex flex-col justify-center">
+					<div className="flex items-center justify-center my-8 border-b-[1px] pb-[15px]">
+						<Title level={3} className="text-black font-bold text-2xl">
+							Reviewed Products
+						</Title>
+					</div>
+					{productsReview.map((item) => (
+						<CardProductReview
+							productDescription={item.descricao}
+							productName={item.nome}
+							productLikes={item.likes}
+						/>
+					))}
+				</div>
+			)}
 		</main>
 	);
 }

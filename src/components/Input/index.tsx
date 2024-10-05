@@ -5,7 +5,7 @@ interface InputProps {
     id: string
     onSubmit?: () => void
     placeholder: string
-    autocomplete: string
+    autoComplete: string
 }
 const InputSearch: React.FC<InputProps> = ({ ...rest }) => {
 	return <input {...rest} />;

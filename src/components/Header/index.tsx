@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 				<MenuHamburguer />
 				<Image src={logo} alt="logo" width={40} height={40} />
 			</div>
-			<div className="hidden md:block relative max-w-md mx-auto">
+			<div className="hidden md:block relative max-w-md">
 				<span className="absolute inset-y-0 left-0 flex items-center pl-3">
 					<svg
 						className="w-5 h-5 text-gray-500"
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
 					</svg>
 				</span>
 				<InputSearch
-					autocomplete="off"
+					autoComplete="off"
 					id="searchproduct"
 					name="q"
 					type="text"

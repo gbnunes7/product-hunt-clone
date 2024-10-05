@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 				<MenuHamburguer />
 				<Image src={logo} alt="logo" width={40} height={40} />
 			</div>
-			<div className="hidden md:block relative max-w-md">
+			<div className="hidden lg:block relative md:hidden">
 				<span className="absolute inset-y-0 left-0 flex items-center pl-3">
 					<svg
 						className="w-5 h-5 text-gray-500"
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							strokeWidth={2}
-							d="M8 4a4 4 0 108 0 4 4 0 00-8 0zm0 2a6 6 0 1012 0A6 6 0 008 6zm2.828 9.828a8 8 0 119.9 9.9"
+							d="M11 4a7 7 0 100 14 7 7 0 000-14zM20 20l-4.35-4.35"
 						/>
 					</svg>
 				</span>

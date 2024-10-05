@@ -56,41 +56,45 @@ export default function Home() {
 	productsReview.sort((a, b) => Number(b.likes) - Number(a.likes));
 
 	return (
-		<main className="px-4 flex flex-col flex-1 overflow-auto">
+		<main className="px-4 my-8 flex flex-col w-full overflow-auto">
 			<FilterBanner />
-			<div className="flex justify-center my-8 border-b-[1px] pb-[15px]">
-				<Title className="text-black font-bold text-2xl" level={1}>
-					Top Products
-				</Title>
-			</div>
-			<ul>
-				{products.map((item) => (
-					<ListItem key={item.id}>
-						<CardProduct
-							productDescription={item.descricao}
-							productName={item.nome}
-							productTags={item.tags}
-							productLikes={item.likes}
-						/>
-					</ListItem>
-				))}
-			</ul>
-			{productsReview.length > 0 && (
-				<div className="flex flex-col justify-center">
-					<div className="flex items-center justify-center my-8 border-b-[1px] pb-[15px]">
-						<Title level={3} className="text-black font-bold text-2xl">
-							Reviewed Products
+			<div className="flex flex-col w-full md:flex-row md:gap-8">
+				<div className="flex flex-col grow md:border-r-[1px] md:pr-[32px]">
+					<div className="flex items-center justify-center my-8 border-b-[1px] pb-[15px] ">
+						<Title className="text-black font-bold text-2xl" level={1}>
+							Top Products
 						</Title>
 					</div>
-					{productsReview.map((item) => (
-						<CardProductReview
-							productDescription={item.descricao}
-							productName={item.nome}
-							productLikes={item.likes}
-						/>
-					))}
+					<ul>
+						{products.map((item) => (
+							<ListItem key={item.id}>
+								<CardProduct
+									productDescription={item.descricao}
+									productName={item.nome}
+									productTags={item.tags}
+									productLikes={item.likes}
+								/>
+							</ListItem>
+						))}
+					</ul>
 				</div>
-			)}
+				{productsReview.length > 0 && (
+					<div className="flex flex-col md:w-[25%]">
+						<div className="flex items-center justify-center my-8 border-b-[1px] md:border-b-0 pb-[15px]">
+							<Title level={3} className="text-black font-bold text-2xl">
+								Reviewed Products
+							</Title>
+						</div>
+						{productsReview.map((item) => (
+							<CardProductReview
+								productDescription={item.descricao}
+								productName={item.nome}
+								productLikes={item.likes}
+							/>
+						))}
+					</div>
+				)}
+			</div>
 		</main>
 	);
 }

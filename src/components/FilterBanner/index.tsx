@@ -5,7 +5,7 @@ import Button from "../Button";
 
 const FilterBanner: React.FC = () => {
 	return (
-		<div className="bg-[#da552f] flex-col max-w-[350px] max-h-[350px] mx-auto my-4 flex items-center p-4 gap-4 rounded shadow-lg shadow-gray-500">
+		<div className="bg-[#da552f] flex-col max-w-[350px]  md:min-w-[500px] max-h-[350px] mx-auto md:my-8 my-4 flex items-center p-4 gap-4 rounded shadow-lg shadow-gray-500">
 			<Title level={1} className="text-xl font-semibold text-white">
 				Trending Topics
 			</Title>

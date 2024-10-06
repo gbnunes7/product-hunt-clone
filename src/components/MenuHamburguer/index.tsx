@@ -12,7 +12,7 @@ const MenuHamburguer: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-center">
+		<div className="flex items-center md:hidden">
 			<Button
 				onClick={toggleMenu}
 				className="relative w-10 h-10 focus:outline-none"

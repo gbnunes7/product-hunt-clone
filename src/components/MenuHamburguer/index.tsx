@@ -13,10 +13,7 @@ const MenuHamburguer: React.FC = () => {
 
 	return (
 		<div className="flex items-center md:hidden">
-			<Button
-				onClick={toggleMenu}
-				className="relative w-10 h-10 focus:outline-none"
-			>
+			<Button onClick={toggleMenu} className="focus:outline-none">
 				<svg width="40" height="40" viewBox="0 0 40 40" className="block">
 					<motion.line
 						x1="10"
@@ -33,7 +30,6 @@ const MenuHamburguer: React.FC = () => {
 						}}
 						transition={{ duration: 0.4 }}
 					/>
-
 					<motion.line
 						x1="10"
 						y1="20"
@@ -45,7 +41,6 @@ const MenuHamburguer: React.FC = () => {
 						animate={{ opacity: isOpen ? 0 : 1 }}
 						transition={{ duration: 0.2 }}
 					/>
-
 					<motion.line
 						x1="10"
 						y1="28"
@@ -73,20 +68,23 @@ const MenuHamburguer: React.FC = () => {
 			>
 				<ul className="flex flex-col text-center justify-center h-[250px]">
 					<Link
-						href="#"
+						href="/"
 						className="text-[#ff6154] hover:text-[#da552f] hover:bg-[#e07458] hover:text-white w-full h-full transition-colors duration-300 ease-in-out"
+						onClick={toggleMenu}
 					>
 						<ListItem className="py-6 text-base">Products</ListItem>
 					</Link>
 					<Link
-						href="#"
+						href="/newproduct"
 						className="text-[#ff6154] hover:text-[#da552f] hover:bg-[#e07458] hover:text-white w-full h-full transition-colors duration-300 ease-in-out"
+						onClick={toggleMenu}
 					>
 						<ListItem className="py-6 text-base">New Product</ListItem>
 					</Link>
 					<Link
-						href="#"
+						href="/about"
 						className="text-[#ff6154] hover:text-[#da552f] hover:bg-[#e07458] hover:text-white w-full h-full transition-colors duration-300 ease-in-out"
+						onClick={toggleMenu}
 					>
 						<ListItem className="py-6 text-base">About</ListItem>
 					</Link>

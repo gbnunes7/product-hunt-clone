@@ -4,13 +4,16 @@ import Button from "../Button";
 import MenuHamburguer from "../MenuHamburguer";
 import ListItem from "../ListItem";
 import InputSearch from "../Input";
+import Link from "next/link";
 
 const Header: React.FC = () => {
 	return (
 		<header className="flex flex-row items-center px-6 py-3 w-full h-[90px] border-b-[1px] md:justify-between">
 			<div className="flex flex-1 md:flex-initial md:w-[50px] flex-row items-center gap-5">
 				<MenuHamburguer />
-				<Image src={logo} alt="logo" width={40} height={40} />
+				<Link href="/">
+					<Image src={logo} alt="logo" width={40} height={40} />
+				</Link>
 			</div>
 			<div className="hidden lg:block relative md:hidden">
 				<span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -41,13 +44,13 @@ const Header: React.FC = () => {
 			<div>
 				<ul className="hidden md:flex md:flex-row md:items-center md:justify-center md:gap-8">
 					<ListItem>
-						<a href="#">Product</a>
+						<Link href="/">Product</Link>
 					</ListItem>
 					<ListItem>
-						<a href="#">New Product</a>
+						<Link href="/newproduct">New Product</Link>
 					</ListItem>
 					<ListItem>
-						<a href="#">About</a>
+						<Link href="/about">About</Link>
 					</ListItem>
 				</ul>
 			</div>

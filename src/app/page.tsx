@@ -85,13 +85,17 @@ export default function Home() {
 								Reviewed Products
 							</Title>
 						</div>
-						{productsReview.map((item) => (
-							<CardProductReview
-								productDescription={item.descricao}
-								productName={item.nome}
-								productLikes={item.likes}
-							/>
-						))}
+						<ul>
+							{productsReview.map((item) => (
+								<ListItem key={item.id}>
+									<CardProductReview
+										productDescription={item.descricao}
+										productName={item.nome}
+										productLikes={item.likes}
+									/>
+								</ListItem>
+							))}
+						</ul>
 					</div>
 				)}
 			</div>

@@ -4,7 +4,7 @@ import logo from "../../app/logo.png";
 interface CardProductReview {
 	productName: string;
 	productDescription: string;
-	productLikes: string;
+	productLikes: number;
 }
 const CardProductReview: React.FC<CardProductReview> = ({
 	productName,
@@ -17,7 +17,10 @@ const CardProductReview: React.FC<CardProductReview> = ({
 			<div className="flex-1">
 				<p className="font-bold">{productName}</p>
 				<p className="text-gray-600">{productDescription}</p>
-				<p className="font-semibold"> Received {productLikes} likes from users.</p>
+				<p className="font-semibold">
+					{" "}
+					Received {productLikes} likes from users.
+				</p>
 			</div>
 		</div>
 	);

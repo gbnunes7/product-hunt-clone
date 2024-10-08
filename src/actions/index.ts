@@ -6,7 +6,13 @@ import { revalidatePath } from "next/cache";
 
 export async function getAll() {
 	try {
-		const response = await db.product.findMany();
+		const response = await db.product.findMany({
+			orderBy: [
+				{
+					likes: "desc",
+				},
+			],
+		});
 		return response;
 	} catch (error) {
 		console.error("Error fetching products:", error);

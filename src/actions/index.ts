@@ -38,3 +38,28 @@ export async function increment(product: Products) {
 		console.error("Error incrementing likes:", err);
 	}
 }
+
+export async function searchQueryDB(query: string) {
+	try {
+		const response = await db.product.findFirst({
+			where: {
+				name: {
+					contains: query,
+					mode: "insensitive",
+				},
+			},
+		});
+
+		if (response === null) {
+			throw new Error("Product not found");
+		}
+
+		return response;
+	} catch (error) {
+		if (error instanceof Error) {
+			console.error("Error searching for product:", error.message);
+		} else {
+			console.error("Unknown error:", error);
+		}
+	}
+}

@@ -13,6 +13,10 @@ export interface MyContextProps {
 	setProductsData: Dispatch<SetStateAction<Products[] | undefined>>;
 	likes: number[];
 	setLikes: Dispatch<SetStateAction<number[]>>;
+	searchQuery: string;
+	setSearchQuery: Dispatch<SetStateAction<string>>;
+	error: string;
+	setError: Dispatch<SetStateAction<string>>;
 }
 
 export interface Products {
@@ -32,6 +36,8 @@ export const MyContext = createContext<MyContextProps | undefined>(undefined);
 const MyProvider = ({ children }: { children: React.ReactNode }) => {
 	const [productsData, setProductsData] = useState<Products[] | undefined>();
 	const [likes, setLikes] = useState<number[]>([]);
+	const [searchQuery, setSearchQuery] = useState("");
+	const [error, setError] = useState("");
 
 	useEffect(() => {
 		const fetchedData = async () => {
@@ -59,6 +65,10 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				setProductsData,
 				likes,
 				setLikes,
+				searchQuery,
+				setSearchQuery,
+				error,
+				setError,
 			}}
 		>
 			{children}

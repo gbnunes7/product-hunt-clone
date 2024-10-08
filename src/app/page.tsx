@@ -8,7 +8,7 @@ import Title from "@/components/Title";
 import useMyContext from "@/hooks/useMyContext";
 
 export default function Home() {
-	const { productsData, likes } = useMyContext()!;
+	const { productsData, likes, error } = useMyContext()!;
 
 	return (
 		<main className="px-4 my-8 flex flex-col w-full overflow-auto">
@@ -20,6 +20,7 @@ export default function Home() {
 							Top Products
 						</Title>
 					</div>
+					{error && <span className="text-red-500 text-sm mb-8">{error}</span>}
 					<ul>
 						{productsData &&
 							productsData.map((item, index) => (

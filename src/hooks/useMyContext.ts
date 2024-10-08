@@ -29,9 +29,14 @@ const useMyContext = () => {
 		increment(product);
 	};
 
+	productsData?.sort((a, b) => b.likes - a.likes);
+	likes?.sort((a, b) => b - a);
+
 	return {
 		handleLike,
 		handleButtonClick,
+		productsData,
+		likes,
 	};
 };
 

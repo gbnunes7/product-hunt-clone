@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import logo from "../../app/logo.png";
 import Button from "../Button";
@@ -5,8 +6,18 @@ import MenuHamburguer from "../MenuHamburguer";
 import ListItem from "../ListItem";
 import InputSearch from "../Input";
 import Link from "next/link";
+import {
+	SignedIn,
+	SignedOut,
+	SignInButton,
+	SignUpButton,
+	UserButton,
+	useUser,
+} from "@clerk/nextjs";
 
 const Header: React.FC = () => {
+	const { user } = useUser();
+
 	return (
 		<header className="flex flex-row items-center px-6 py-3 w-full h-[90px] border-b-[1px] md:justify-between">
 			<div className="flex flex-1 md:flex-initial md:w-[50px] flex-row items-center gap-5">
@@ -55,12 +66,24 @@ const Header: React.FC = () => {
 				</ul>
 			</div>
 			<div className="flex flex-row items-center justify-end gap-4">
-				<Button className="text-base font-normal text-[#ff6154] rounded bg-[#fef6f2] px-4 py-1.5">
-					Subscribe
-				</Button>
-				<Button className="text-base font-normal text-white rounded bg-[#da552f] px-4 py-1.5">
-					Sign in
-				</Button>
+				<SignedOut>
+					<SignInButton>
+						<Button className="text-base font-normal text-white rounded bg-[#da552f] px-4 py-1.5">
+							Sign in
+						</Button>
+					</SignInButton>
+					<SignUpButton>
+						<Button className="text-base font-normal text-[#ff6154] rounded bg-[#fef6f2] px-4 py-1.5">
+							Subscribe
+						</Button>
+					</SignUpButton>
+				</SignedOut>
+				<SignedIn>
+					<div className="text-base font-normal text-[#ff6154] rounded bg-[#fef6f2] px-4 py-1.5">
+						Welcome, {user?.firstName}!
+					</div>
+					<UserButton />
+				</SignedIn>
 			</div>
 		</header>
 	);

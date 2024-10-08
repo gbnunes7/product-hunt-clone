@@ -5,11 +5,10 @@ import CardProductReview from "@/components/CardProductReview";
 import FilterBanner from "@/components/FilterBanner";
 import ListItem from "@/components/ListItem";
 import Title from "@/components/Title";
-import { MyContext } from "@/context/mycontext";
-import { useContext } from "react";
+import useMyContext from "@/hooks/useMyContext";
 
 export default function Home() {
-	const { productsData, likes } = useContext(MyContext)!;
+	const { productsData, likes } = useMyContext()!;
 
 	return (
 		<main className="px-4 my-8 flex flex-col w-full overflow-auto">

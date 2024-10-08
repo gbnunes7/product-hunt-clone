@@ -21,7 +21,7 @@ export interface Products {
 	description: string;
 	url: string;
 	likes: number;
-	tag: string;
+	tag: string[];
 	review: boolean;
 	createdAt: Date;
 	updatedAt: Date;

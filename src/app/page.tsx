@@ -37,7 +37,7 @@ export default function Home() {
 					</ul>
 				</div>
 				{productsData && (
-					<div className="flex flex-col md:w-[25%]">
+					<div className="flex flex-col lg:w-[25%]">
 						<div className="flex items-center justify-center my-8 border-b-[1px] md:border-b-0 pb-[15px]">
 							<Title level={3} className="text-black font-bold text-2xl">
 								Reviewed Products

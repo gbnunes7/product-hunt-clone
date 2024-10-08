@@ -7,11 +7,10 @@ interface CardProductProps {
 	productName: string;
 	productDescription: string;
 	productLikes: number;
-	productTags: string;
+	productTags: string[];
 	product: Product;
-	index: number
+	index: number;
 }
-
 
 const CardProduct: React.FC<CardProductProps> = ({
 	productName,
@@ -28,9 +27,14 @@ const CardProduct: React.FC<CardProductProps> = ({
 				<span className="font-bold">{productName}</span>
 				<p className="text-gray-600">{productDescription}</p>
 				<div className="flex flex-wrap mt-2">
-					<span className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-						{productTags}
-					</span>
+					{productTags?.map(
+						(productTag) =>
+							productTag && (
+								<span key={productTag} className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+									{productTag}
+								</span>
+							)
+					)}
 				</div>
 			</div>
 			<UpVote index={index} product={product} likes={productLikes} />

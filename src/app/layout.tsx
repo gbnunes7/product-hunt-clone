@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import logo from "./logo.png";
 import Header from "@/components/Header";
+import MyProvider from "@/context/mycontext";
 
 export const metadata: Metadata = {
 	title: "Product Hunt Clone",
@@ -17,8 +18,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className="flex flex-col min-h-screen">
-				<Header />
-				{children}
+				<MyProvider>
+					<Header />
+					{children}
+				</MyProvider>
 			</body>
 		</html>
 	);

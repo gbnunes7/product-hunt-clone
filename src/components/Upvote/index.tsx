@@ -1,13 +1,22 @@
 import Button from "../Button";
+import { Product } from "@prisma/client";
+import useMyContext from "@/hooks/useMyContext";
 
 interface UpVoteProps {
-	likes: string;
+	likes: number;
+	product: Product;
+	index: number;
 }
 
-const UpVote: React.FC<UpVoteProps> = ({ likes }) => {
+const UpVote: React.FC<UpVoteProps> = ({ likes, product, index }) => {
+	const { handleButtonClick } = useMyContext()!;
+
 	return (
 		<div className="flex flex-col w-[50px] items-center my-auto">
-			<Button className="flex items-center flex-col">
+			<Button
+				onClick={() => handleButtonClick(index, product)}
+				className="flex items-center flex-col"
+			>
 				<svg
 					width="20"
 					height="20"

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import logo from "../../app/logo.png";
 import UpVote from "../Upvote";
 import { Product } from "@prisma/client";
+import useMyContext from "@/hooks/useMyContext";
 
 interface CardProductProps {
 	productName: string;
@@ -20,9 +20,10 @@ const CardProduct: React.FC<CardProductProps> = ({
 	product,
 	index,
 }) => {
+	const { productsData } = useMyContext()!;
 	return (
 		<div className="mb-4 p-4 flex flex-row items-start gap-2 border rounded shadow-md">
-			<Image alt="Logo" src={logo} width={50} height={50} />
+			<Image alt="Logo" src={productsData![index].url} width={50} height={50} className="py-4 mr-2"/>
 			<div className="flex-1 border-r-[1px]">
 				<span className="font-bold">{productName}</span>
 				<p className="text-gray-600">{productDescription}</p>
@@ -30,7 +31,10 @@ const CardProduct: React.FC<CardProductProps> = ({
 					{productTags?.map(
 						(productTag) =>
 							productTag && (
-								<span key={productTag} className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+								<span
+									key={productTag}
+									className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+								>
 									{productTag}
 								</span>
 							)

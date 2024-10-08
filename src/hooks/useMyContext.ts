@@ -67,6 +67,10 @@ const useMyContext = () => {
 		}
 	};
 
+	useEffect(() => {
+		setError("");
+	}, []);
+
 	return {
 		handleLike,
 		handleButtonClick,

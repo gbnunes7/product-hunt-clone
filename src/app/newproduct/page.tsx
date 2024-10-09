@@ -1,10 +1,30 @@
+"use client";
 import Button from "@/components/Button";
 import InputSearch from "@/components/Input";
 import Title from "@/components/Title";
+import useMyContext from "@/hooks/useMyContext";
 
 export default function NewProduct() {
+	const {
+		productDescription,
+		setProductDescription,
+		productName,
+		setProductName,
+		productImageUrl,
+		setProductImageUrl,
+		productIsReviewed,
+		setProductIsReviewed,
+		productTags,
+		setProductTags,
+		onSubmit,
+		error,
+		clearForm,
+	} = useMyContext()!;
 	return (
-		<form className="bg-[#da552f] p-6 w-4/5 md:grid md:grid-cols-2 flex flex-col mx-auto rounded-lg shadow-lg shadow-gray-500 gap-4 my-auto">
+		<form
+			onSubmit={onSubmit}
+			className="bg-[#da552f] p-6 w-4/5 md:grid md:grid-cols-2 flex flex-col mx-auto rounded-lg shadow-lg shadow-gray-500 gap-4 my-auto"
+		>
 			<Title className="text-2xl font-bold text-white text-center mb-2 md:col-span-2">
 				Register a new product
 			</Title>
@@ -13,6 +33,11 @@ export default function NewProduct() {
 					Product Name
 				</label>
 				<InputSearch
+					required
+					minLength={3}
+					maxLength={50}
+					value={productName}
+					onChange={(event) => setProductName(event.target.value)}
 					placeholder="Enter the product name here..."
 					name="name"
 					id="name"
@@ -26,6 +51,11 @@ export default function NewProduct() {
 					Product Description
 				</label>
 				<InputSearch
+					required
+					minLength={3}
+					maxLength={500}
+					value={productDescription}
+					onChange={(event) => setProductDescription(event.target.value)}
 					placeholder="Enter the product description here..."
 					name="description"
 					id="description"
@@ -39,6 +69,11 @@ export default function NewProduct() {
 					Product Image URL
 				</label>
 				<InputSearch
+					required
+					minLength={3}
+					maxLength={50}
+					value={productImageUrl}
+					onChange={(event) => setProductImageUrl(event.target.value)}
 					placeholder="Enter the product URL image here..."
 					name="url"
 					id="url"
@@ -52,6 +87,11 @@ export default function NewProduct() {
 					Product Tags
 				</label>
 				<InputSearch
+					required
+					minLength={3}
+					maxLength={50}
+					value={productTags}
+					onChange={(event) => setProductTags(event.target.value.split(","))}
 					placeholder="Enter the product tags here..."
 					name="tags"
 					id="tags"
@@ -62,6 +102,8 @@ export default function NewProduct() {
 			</div>
 			<label className="flex items-center text-black text-sm md:text-base font-semibold">
 				<InputSearch
+					value={productIsReviewed}
+					onChange={(event) => setProductIsReviewed(event.target.checked)}
 					placeholder=""
 					name="isReviewed"
 					id="isReviewed"
@@ -72,12 +114,22 @@ export default function NewProduct() {
 				Check if this product has been reviewed by the team
 			</label>
 			<div className="flex flex-col justify-center gap-4 mt-4 md:w-5/5 md:col-span-2">
-				<Button className="bg-[#FEF6F2] text-[#FF6154] px-3 py-1.5 w-[90%] md:w-full mx-auto rounded-md transition-all duration-200 hover:bg-gray-200">
+				<Button
+					type="submit"
+					className="bg-[#FEF6F2] text-[#FF6154] px-3 py-1.5 w-[90%] md:w-full mx-auto rounded-md transition-all duration-200 hover:bg-gray-200"
+				>
 					Submit
 				</Button>
-				<Button className="bg-[#2980B9] text-white px-3 py-1.5 w-[90%] md:w-full mx-auto rounded-md transition-all duration-200 hover:bg-[#2C3E50]">
+				<Button
+					type="button"
+					onClick={clearForm}
+					className="bg-[#2980B9] text-white px-3 py-1.5 w-[90%] md:w-full mx-auto rounded-md transition-all duration-200 hover:bg-[#2C3E50]"
+				>
 					Clear
 				</Button>
+				{error && (
+					<span className="text-white text-center text-lg">{error}</span>
+				)}
 			</div>
 		</form>
 	);

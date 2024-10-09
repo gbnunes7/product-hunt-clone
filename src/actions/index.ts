@@ -63,3 +63,40 @@ export async function searchQueryDB(query: string) {
 		}
 	}
 }
+
+export async function filterByTag(tag: string) {
+	try {
+		const response = await db.product.findMany({
+			where: {
+				tag: {
+					has: tag,
+				},
+			},
+		});
+		if (response === null) {
+			throw new Error("Product not found");
+		}
+
+		return response;
+	} catch (error) {
+		if (error instanceof Error) {
+			console.error("Error searching for product:", error.message);
+		} else {
+			console.error("Unknown error:", error);
+		}
+	}
+}
+
+export async function createProduct(product: Products) {
+	try {
+		await db.product.create({
+			data: {
+				...product,
+			},
+		});
+		return true;
+	} catch (error) {
+		console.error("Error creating product:", error);
+		return false;
+	}
+}

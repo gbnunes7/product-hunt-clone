@@ -17,6 +17,16 @@ export interface MyContextProps {
 	setSearchQuery: Dispatch<SetStateAction<string>>;
 	error: string;
 	setError: Dispatch<SetStateAction<string>>;
+	productDescription: string;
+	setProductDescription: Dispatch<SetStateAction<string>>;
+	productName: string;
+	setProductName: Dispatch<SetStateAction<string>>;
+	productTags: string[];
+	setProductTags: Dispatch<SetStateAction<string[]>>;
+	productImageUrl: string;
+	setProductImageUrl: Dispatch<SetStateAction<string>>;
+	productIsReviewed: boolean;
+	setProductIsReviewed: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface Products {
@@ -38,6 +48,11 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 	const [likes, setLikes] = useState<number[]>([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [error, setError] = useState("");
+	const [productDescription, setProductDescription] = useState("");
+	const [productName, setProductName] = useState("");
+	const [productTags, setProductTags] = useState<string[]>([]);
+	const [productImageUrl, setProductImageUrl] = useState("");
+	const [productIsReviewed, setProductIsReviewed] = useState(false);
 
 	useEffect(() => {
 		const fetchedData = async () => {
@@ -47,7 +62,6 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 					setProductsData(data);
 					const likesArray = data.map((product) => product.likes);
 					setLikes(likesArray);
-					console.log(likesArray);
 				} else {
 					console.error("No data retrieved from getAll() function");
 				}
@@ -69,6 +83,16 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				setSearchQuery,
 				error,
 				setError,
+				productDescription,
+				setProductDescription,
+				productName,
+				setProductName,
+				productTags,
+				setProductTags,
+				productImageUrl,
+				setProductImageUrl,
+				productIsReviewed,
+				setProductIsReviewed,
 			}}
 		>
 			{children}

@@ -1,6 +1,9 @@
-import { increment, searchQueryDB } from "@/actions";
+"use client";
+
+import { createProduct, increment, searchQueryDB } from "@/actions";
 import { MyContext, Products } from "@/context/mycontext";
 import { useContext, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const useMyContext = () => {
 	const context = useContext(MyContext)!;
@@ -18,8 +21,19 @@ const useMyContext = () => {
 		setSearchQuery,
 		error,
 		setError,
+		productDescription,
+		productName,
+		productImageUrl,
+		productIsReviewed,
+		productTags,
+		setProductDescription,
+		setProductName,
+		setProductImageUrl,
+		setProductIsReviewed,
+		setProductTags,
 	} = context;
 
+	const router = useRouter();
 	const handleLike = (index: number) => {
 		if (productsData) {
 			const updatedLikes = [...likes];
@@ -33,6 +47,7 @@ const useMyContext = () => {
 			setProductsData(updatedProductsData);
 		}
 	};
+
 	const handleButtonClick = (index: number, product: Products) => {
 		handleLike(index);
 		increment(product);
@@ -66,6 +81,68 @@ const useMyContext = () => {
 			}
 		}
 	};
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const newProduct = {
+			name: productName,
+			description: productDescription,
+			likes: 0,
+			review: productIsReviewed,
+			url: productImageUrl,
+			tag: productTags,
+		} as Products;
+
+		if (!newProduct) {
+			return setError("newProduct is null or undefined");
+		}
+
+		if (
+			!newProduct.name ||
+			!newProduct.description ||
+			!newProduct.url ||
+			!newProduct.tag
+		) {
+			return setError("All fields are required");
+		}
+
+		try {
+			const res = await createProduct(newProduct);
+			if (!res) {
+				return setError("Error creating product");
+			}
+
+			if (likes) {
+				setLikes([...likes, newProduct.likes]);
+			}
+
+			if (productsData) {
+				setProductsData([...productsData, newProduct]);
+			} else {
+				setProductsData([newProduct]);
+			}
+
+			clearForm();
+			setError("");
+			await new Promise((resolve) => setTimeout(resolve, 500));
+			router.push("/");
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error("Error creating product:", error.message);
+				setError("Error creating product: " + error.message);
+			} else {
+				console.error("Unknown error:", error);
+				setError("Unknown error");
+			}
+		}
+	};
+
+	const clearForm = () => {
+		setProductName("");
+		setProductDescription("");
+		setProductImageUrl("");
+		setProductTags([]);
+		setProductIsReviewed(false);
+	};
 
 	useEffect(() => {
 		setError("");
@@ -80,6 +157,18 @@ const useMyContext = () => {
 		onHandleSubmit,
 		searchQuery,
 		error,
+		productDescription,
+		productName,
+		productImageUrl,
+		productIsReviewed,
+		productTags,
+		setProductDescription,
+		setProductName,
+		setProductImageUrl,
+		setProductIsReviewed,
+		setProductTags,
+		onSubmit,
+		clearForm,
 	};
 };
 

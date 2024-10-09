@@ -25,7 +25,10 @@ export default function NewProduct() {
 			onSubmit={onSubmit}
 			className="bg-[#da552f] p-6 w-4/5 md:grid md:grid-cols-2 flex flex-col mx-auto rounded-lg shadow-lg shadow-gray-500 gap-4 my-auto"
 		>
-			<Title className="text-2xl font-bold text-white text-center mb-2 md:col-span-2">
+			<Title
+				level={5}
+				className="text-2xl font-bold text-white text-center mb-2 md:col-span-2"
+			>
 				Register a new product
 			</Title>
 			<div className="flex flex-col md:w-5/5 gap-2">

@@ -1,45 +1,9 @@
 "use client";
 
 import { getAll } from "@/actions";
-import {
-	createContext,
-	Dispatch,
-	SetStateAction,
-	useEffect,
-	useState,
-} from "react";
-export interface MyContextProps {
-	productsData: Products[] | undefined;
-	setProductsData: Dispatch<SetStateAction<Products[] | undefined>>;
-	likes: number[];
-	setLikes: Dispatch<SetStateAction<number[]>>;
-	searchQuery: string;
-	setSearchQuery: Dispatch<SetStateAction<string>>;
-	error: string;
-	setError: Dispatch<SetStateAction<string>>;
-	productDescription: string;
-	setProductDescription: Dispatch<SetStateAction<string>>;
-	productName: string;
-	setProductName: Dispatch<SetStateAction<string>>;
-	productTags: string[];
-	setProductTags: Dispatch<SetStateAction<string[]>>;
-	productImageUrl: string;
-	setProductImageUrl: Dispatch<SetStateAction<string>>;
-	productIsReviewed: boolean;
-	setProductIsReviewed: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface Products {
-	id: number;
-	name: string;
-	description: string;
-	url: string;
-	likes: number;
-	tag: string[];
-	review: boolean;
-	createdAt: Date;
-	updatedAt: Date;
-}
+import { MyContextProps } from "@/interface/contextProps";
+import { Products } from "@/interface/productsProps";
+import { createContext, useEffect, useState } from "react";
 
 export const MyContext = createContext<MyContextProps | undefined>(undefined);
 

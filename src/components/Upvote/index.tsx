@@ -1,12 +1,6 @@
 import Button from "../Button";
-import { Product } from "@prisma/client";
 import useMyContext from "@/hooks/useMyContext";
-
-interface UpVoteProps {
-	likes: number;
-	product: Product;
-	index: number;
-}
+import { UpVoteProps } from "@/interface/upVotesProps";
 
 const UpVote: React.FC<UpVoteProps> = ({ likes, product, index }) => {
 	const { handleButtonClick } = useMyContext()!;

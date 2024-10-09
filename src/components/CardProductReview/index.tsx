@@ -1,11 +1,7 @@
 import useMyContext from "@/hooks/useMyContext";
+import { CardProductReviewProps } from "@/interface/cardProductReviewProps";
 import Image from "next/image";
-interface CardProductReview {
-	productName: string;
-	productDescription: string;
-	productLikes: number;
-}
-const CardProductReview: React.FC<CardProductReview> = ({
+const CardProductReview: React.FC<CardProductReviewProps> = ({
 	productName,
 	productDescription,
 	productLikes,

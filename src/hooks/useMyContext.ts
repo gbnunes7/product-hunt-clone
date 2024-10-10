@@ -155,7 +155,7 @@ const useMyContext = () => {
 
 	useEffect(() => {
 		setError("");
-	}, []);
+	}, [setError]);
 
 	const onClickFilter = async (tag: string) => {
 		const res = await filterByTag(tag);

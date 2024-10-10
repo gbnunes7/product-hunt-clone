@@ -20,4 +20,8 @@ export interface MyContextProps {
 	setProductImageUrl: Dispatch<SetStateAction<string>>;
 	productIsReviewed: boolean;
 	setProductIsReviewed: Dispatch<SetStateAction<boolean>>;
+	allProducts: Products[];
+	setAllProducts: Dispatch<SetStateAction<Products[]>>;
+	filterResult: boolean;
+	setFilterResult: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,6 +1,6 @@
 "use server";
 
-import { Products } from "@/context/mycontext";
+import { Products } from "@/interface/productsProps";
 import db from "../../prisma/db";
 import { revalidatePath } from "next/cache";
 
@@ -63,21 +63,23 @@ export async function searchQueryDB(query: string) {
 		}
 	}
 }
-
 export async function filterByTag(tag: string) {
 	try {
-		const response = await db.product.findMany({
-			where: {
-				tag: {
-					has: tag,
-				},
-			},
-		});
-		if (response === null) {
+		const response = await db.product.findMany();
+
+		const lowerCaseTag = tag.toLowerCase().trim();
+
+		const filteredProducts = response.filter((product) =>
+			product.tag.some(
+				(productTag) => productTag.toLowerCase() === lowerCaseTag
+			)
+		);
+
+		if (filteredProducts.length === 0) {
 			throw new Error("Product not found");
 		}
 
-		return response;
+		return filteredProducts;
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error searching for product:", error.message);

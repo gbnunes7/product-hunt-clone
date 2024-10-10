@@ -6,7 +6,8 @@ export interface InputProps {
 	onSubmit?: () => void;
 	placeholder: string;
 	autoComplete: string;
-	value: any;
+	value?: string | number | string[] | undefined;
+	checked?: boolean;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	required?: boolean;
 	minLength?: number;

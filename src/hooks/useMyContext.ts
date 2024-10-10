@@ -1,9 +1,15 @@
 "use client";
 
-import { createProduct, increment, searchQueryDB } from "@/actions";
-import { MyContext, Products } from "@/context/mycontext";
+import {
+	createProduct,
+	filterByTag,
+	increment,
+	searchQueryDB,
+} from "@/actions";
+import { MyContext } from "@/context/mycontext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Products } from "@/interface/productsProps";
 
 const useMyContext = () => {
 	const context = useContext(MyContext)!;
@@ -31,6 +37,9 @@ const useMyContext = () => {
 		setProductImageUrl,
 		setProductIsReviewed,
 		setProductTags,
+		allProducts,
+		filterResult,
+		setFilterResult,
 	} = context;
 
 	const router = useRouter();
@@ -148,6 +157,24 @@ const useMyContext = () => {
 		setError("");
 	}, []);
 
+	const onClickFilter = async (tag: string) => {
+		const res = await filterByTag(tag);
+
+		if (!res) {
+			setError("Error filtering by tag");
+			setFilterResult(false);
+			return false;
+		}
+
+		setProductsData(res);
+		setFilterResult(true);
+	};
+
+	const onClearFilter = () => {
+		setProductsData(allProducts);
+		setFilterResult(false);
+	};
+
 	return {
 		handleLike,
 		handleButtonClick,
@@ -169,6 +196,9 @@ const useMyContext = () => {
 		setProductTags,
 		onSubmit,
 		clearForm,
+		onClickFilter,
+		onClearFilter,
+		filterResult,
 	};
 };
 

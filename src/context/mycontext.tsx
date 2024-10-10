@@ -17,6 +17,8 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 	const [productTags, setProductTags] = useState<string[]>([]);
 	const [productImageUrl, setProductImageUrl] = useState("");
 	const [productIsReviewed, setProductIsReviewed] = useState(false);
+	const [allProducts, setAllProducts] = useState<Products[]>([]);
+	const [filterResult, setFilterResult] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchedData = async () => {
@@ -24,6 +26,7 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				const data = await getAll();
 				if (data) {
 					setProductsData(data);
+					setAllProducts(data);
 					const likesArray = data.map((product) => product.likes);
 					setLikes(likesArray);
 				} else {
@@ -57,6 +60,10 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				setProductImageUrl,
 				productIsReviewed,
 				setProductIsReviewed,
+				allProducts,
+				setAllProducts,
+				filterResult,
+				setFilterResult,
 			}}
 		>
 			{children}

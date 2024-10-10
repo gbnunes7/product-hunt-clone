@@ -1,9 +1,29 @@
-import Link from "next/link";
 import ListItem from "../ListItem";
 import Title from "../Title";
 import Button from "../Button";
+import useMyContext from "@/hooks/useMyContext";
 
 const FilterBanner: React.FC = () => {
+	const { productsData, onClickFilter, onClearFilter, filterResult } =
+		useMyContext()!;
+
+	if (!productsData) {
+		return <></>;
+	}
+
+	const setTags = new Set(
+		productsData
+			.map((product) =>
+				product.tag.map((tag) =>
+					tag
+						.toLowerCase()
+						.trim()
+						.replace(/^\w/, (c) => c.toUpperCase())
+				)
+			)
+			.flat()
+	);
+
 	return (
 		<div className="bg-[#da552f] flex-col max-w-[350px]  md:min-w-[500px] max-h-[350px] mx-auto md:my-8 my-4 flex items-center p-4 gap-4 rounded shadow-lg shadow-gray-500">
 			<Title level={1} className="text-xl font-semibold text-white">
@@ -11,42 +31,29 @@ const FilterBanner: React.FC = () => {
 			</Title>
 			<div>
 				<ul className="flex flex-wrap justify-center gap-4">
-					<ListItem>
-						<Link href="#">
-							<Button className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1 ">
-								AI
-							</Button>
-						</Link>
-					</ListItem>
-					<ListItem>
-						<Link href="#">
-							<Button className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1">
-								DevOps
-							</Button>
-						</Link>
-					</ListItem>
-					<ListItem>
-						<Link href="#">
-							<Button className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1">
-								Marketing
-							</Button>
-						</Link>
-					</ListItem>
-					<ListItem>
-						<Link href="#">
-							<Button className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1">
-								Tech
-							</Button>
-						</Link>
-					</ListItem>
-					<ListItem>
-						<Link href="#">
-							<Button className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1">
-								SaaS
-							</Button>
-						</Link>
-					</ListItem>
+					{Array.from(setTags).map((tag) => (
+						<ListItem key={tag}>
+							<div className="flex items-center space-x-2">
+								<Button
+									onClick={() => onClickFilter(tag)}
+									className="text-base font-normal text-[#ff6154] rounded-lg bg-[#fef6f2] px-4 py-1"
+								>
+									{tag}
+								</Button>
+							</div>
+						</ListItem>
+					))}
 				</ul>
+				{filterResult && (
+					<div className="text-center mt-4">
+						<Button
+							className="text-base font-semibold text-blue-600 rounded-lg bg-white px-4 py-1"
+							onClick={() => onClearFilter()}
+						>
+							Clear Filter
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

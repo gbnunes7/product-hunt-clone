@@ -11,8 +11,8 @@ export default function About() {
 			</Title>
 			<div className="bg-white p-10 shadow-gray-500 w-4/5 md:w-2/5 border rounded shadow-md flex flex-col gap-4">
 				<p>
-					This is a website clone inspired by "Product Hunt", designed to track
-					the most valuable apps and offer a variety of features.
+					This is a website clone inspired by &quot;Product Hunt&quot;, designed
+					to track the most valuable apps and offer a variety of features.
 				</p>
 				<div className="flex gap-4">
 					<Image src={nextImg} alt="NextJS logo" width={30} height={30} />

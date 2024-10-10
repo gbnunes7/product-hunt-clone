@@ -105,7 +105,7 @@ export default function NewProduct() {
 			</div>
 			<label className="flex items-center text-black text-sm md:text-base font-semibold">
 				<InputSearch
-					value={productIsReviewed}
+					checked={productIsReviewed as boolean}
 					onChange={(event) => setProductIsReviewed(event.target.checked)}
 					placeholder=""
 					name="isReviewed"

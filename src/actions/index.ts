@@ -102,3 +102,17 @@ export async function createProduct(product: Products) {
 		return false;
 	}
 }
+
+export async function deleteProduct(product: Products) {
+	try {
+		await db.product.delete({
+			where: {
+				id: product.id,
+			},
+		});
+		return true;
+	} catch (error) {
+		console.error("Error deleting product:", error);
+		return false;
+	}
+}

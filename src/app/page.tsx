@@ -46,16 +46,18 @@ export default function Home() {
 						</div>
 						<ul>
 							{productsData
-								.filter((item) => item.review)
-								.map((item) => (
-									<ListItem key={item.id}>
-										<CardProductReview
-											productDescription={item.description}
-											productName={item.name}
-											productLikes={item.likes}
-										/>
-									</ListItem>
-								))}
+								? productsData
+										.filter((item) => item?.review)
+										.map((item) => (
+											<ListItem key={item?.id}>
+												<CardProductReview
+													productDescription={item?.description}
+													productName={item?.name}
+													productLikes={item?.likes}
+												/>
+											</ListItem>
+										))
+								: null}
 						</ul>
 					</div>
 				)}

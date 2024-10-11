@@ -2,6 +2,7 @@
 
 import {
 	createProduct,
+	deleteProduct,
 	filterByTag,
 	increment,
 	searchQueryDB,
@@ -39,6 +40,7 @@ const useMyContext = () => {
 		setProductTags,
 		allProducts,
 		filterResult,
+		setAllProducts,
 		setFilterResult,
 	} = context;
 
@@ -157,6 +159,27 @@ const useMyContext = () => {
 		setError("");
 	}, [setError]);
 
+	const onDeleteProduct = async (
+		index: number,
+		product: Products | undefined
+	) => {
+		if (!product) {
+			console.error("onDeleteProduct: product is undefined");
+			return;
+		}
+
+		try {
+			const res = await deleteProduct(product);
+			if (res) {
+				setProductsData(allProducts.filter((p) => p.id !== product.id));
+				setAllProducts(allProducts.filter((p) => p.id !== product.id));
+			} else {
+				console.error("onDeleteProduct: deleteProduct returned false");
+			}
+		} catch (err) {
+			console.error("onDeleteProduct: error deleting product", err);
+		}
+	};
 	const onClickFilter = async (tag: string) => {
 		const res = await filterByTag(tag);
 
@@ -183,6 +206,7 @@ const useMyContext = () => {
 		handleSearch,
 		onHandleSubmit,
 		searchQuery,
+		onDeleteProduct,
 		error,
 		productDescription,
 		productName,

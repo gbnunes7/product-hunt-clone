@@ -2,6 +2,9 @@ import Image from "next/image";
 import UpVote from "../Upvote";
 import useMyContext from "@/hooks/useMyContext";
 import { CardProductProps } from "@/interface/cardProductsProps";
+import Button from "../Button";
+import { MdDelete } from "react-icons/md";
+import { SignedIn } from "@clerk/nextjs";
 
 const CardProduct: React.FC<CardProductProps> = ({
 	productName,
@@ -11,16 +14,23 @@ const CardProduct: React.FC<CardProductProps> = ({
 	product,
 	index,
 }) => {
-	const { productsData } = useMyContext()!;
+	const { productsData, onDeleteProduct } = useMyContext()!;
 	return (
 		<div className="mb-4 p-4 flex flex-row items-start gap-2 border rounded shadow-md">
-			<Image
-				alt="Logo"
-				src={productsData![index].url}
-				width={50}
-				height={50}
-				className="py-4 mr-2"
-			/>
+			<div className="flex flex-col justify-center">
+				<Image
+					alt="Logo"
+					src={productsData![index].url}
+					width={50}
+					height={50}
+					className="py-4 mr-2"
+				/>
+				<SignedIn>
+					<Button onClick={() => onDeleteProduct(index, product)}>
+						<MdDelete className="text-gray-400" />
+					</Button>
+				</SignedIn>
+			</div>
 			<div className="flex-1 border-r-[1px]">
 				<span className="font-bold">{productName}</span>
 				<p className="text-gray-600">{productDescription}</p>

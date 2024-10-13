@@ -23,7 +23,7 @@ export default function NewProduct() {
 	return (
 		<form
 			onSubmit={onSubmit}
-			className="bg-[#da552f] p-6 w-4/5 md:grid md:grid-cols-2 flex flex-col mx-auto rounded-lg shadow-lg shadow-gray-500 gap-4 my-auto"
+			className="bg-[#da552f] p-6 w-4/5 md:grid md:grid-cols-2 flex flex-col mx-auto rounded-lg shadow-lg shadow-gray-500 gap-4 my-12"
 		>
 			<Title
 				level={5}
@@ -74,7 +74,6 @@ export default function NewProduct() {
 				<InputSearch
 					required
 					minLength={3}
-					maxLength={50}
 					value={productImageUrl}
 					onChange={(event) => setProductImageUrl(event.target.value)}
 					placeholder="Enter the product URL image here..."

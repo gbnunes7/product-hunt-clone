@@ -6,6 +6,7 @@ import FilterBanner from "@/components/FilterBanner";
 import ListItem from "@/components/ListItem";
 import Title from "@/components/Title";
 import useMyContext from "@/hooks/useMyContext";
+import { motion } from "framer-motion";
 
 export default function Home() {
 	const { productsData, likes, error } = useMyContext()!;
@@ -24,16 +25,25 @@ export default function Home() {
 					<ul>
 						{productsData &&
 							productsData.map((item, index) => (
-								<ListItem key={index}>
-									<CardProduct
-										index={index}
-										productDescription={item.description}
-										productName={item.name}
-										productTags={item.tag}
-										productLikes={likes[index]}
-										product={item}
-									/>
-								</ListItem>
+								<motion.div
+									layout
+									key={index}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.5 }}
+								>
+									<ListItem>
+										<CardProduct
+											index={index}
+											productDescription={item.description}
+											productName={item.name}
+											productTags={item.tag}
+											productLikes={likes[index]}
+											product={item}
+										/>
+									</ListItem>
+								</motion.div>
 							))}
 					</ul>
 				</div>

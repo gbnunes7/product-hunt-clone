@@ -4,25 +4,8 @@ import Button from "../Button";
 import useMyContext from "@/hooks/useMyContext";
 
 const FilterBanner: React.FC = () => {
-	const { productsData, onClickFilter, onClearFilter, filterResult } =
+	const { onClickFilter, onClearFilter, filterResult, filterTags } =
 		useMyContext()!;
-
-	if (!productsData) {
-		return <></>;
-	}
-
-	const setTags = new Set(
-		productsData
-			.map((product) =>
-				product.tag.map((tag) =>
-					tag
-						.toLowerCase()
-						.trim()
-						.replace(/^\w/, (c) => c.toUpperCase())
-				)
-			)
-			.flat()
-	);
 
 	return (
 		<div className="bg-[#da552f] flex-col max-w-[350px]  md:min-w-[500px] max-h-[350px] mx-auto md:my-8 my-4 flex items-center p-4 gap-4 rounded shadow-lg shadow-gray-500">
@@ -31,7 +14,7 @@ const FilterBanner: React.FC = () => {
 			</Title>
 			<div>
 				<ul className="flex flex-wrap justify-center gap-4">
-					{Array.from(setTags).map((tag) => (
+					{filterTags?.map((tag) => (
 						<ListItem key={tag}>
 							<div className="flex items-center space-x-2">
 								<Button

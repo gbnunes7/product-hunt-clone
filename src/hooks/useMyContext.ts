@@ -42,6 +42,8 @@ const useMyContext = () => {
 		filterResult,
 		setAllProducts,
 		setFilterResult,
+		filterTags,
+		setFilterTags,
 	} = context;
 
 	const router = useRouter();
@@ -131,6 +133,10 @@ const useMyContext = () => {
 
 			if (likes) {
 				setLikes([...likes, newProduct.likes]);
+			}
+
+			if (filterTags) {
+				setFilterTags([...filterTags, ...newProduct.tag]);
 			}
 
 			if (productsData) {
@@ -230,6 +236,8 @@ const useMyContext = () => {
 		onClickFilter,
 		onClearFilter,
 		filterResult,
+		filterTags,
+		setFilterTags,
 	};
 };
 

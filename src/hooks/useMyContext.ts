@@ -95,16 +95,22 @@ const useMyContext = () => {
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const newProduct = {
-			name: productName,
-			description: productDescription,
+			name: productName.trim(),
+			description: productDescription.trim(),
 			likes: 0,
 			review: productIsReviewed,
-			url: productImageUrl,
-			tag: productTags,
+			url: productImageUrl.trim(),
+			tag: productTags.map((tag) => tag.trim()),
 		} as Products;
 
 		if (!newProduct) {
+			clearForm();
 			return setError("newProduct is null or undefined");
+		}
+
+		if (!newProduct.url.startsWith("https://")) {
+			clearForm();
+			return setError("Url must start with https://");
 		}
 
 		if (
@@ -113,6 +119,7 @@ const useMyContext = () => {
 			!newProduct.url ||
 			!newProduct.tag
 		) {
+			clearForm();
 			return setError("All fields are required");
 		}
 

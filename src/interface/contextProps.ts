@@ -24,4 +24,6 @@ export interface MyContextProps {
 	setAllProducts: Dispatch<SetStateAction<Products[]>>;
 	filterResult: boolean;
 	setFilterResult: Dispatch<SetStateAction<boolean>>;
+	filterTags: string[];
+	setFilterTags: Dispatch<SetStateAction<string[]>>;
 }

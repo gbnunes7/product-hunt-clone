@@ -19,6 +19,7 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 	const [productIsReviewed, setProductIsReviewed] = useState(false);
 	const [allProducts, setAllProducts] = useState<Products[]>([]);
 	const [filterResult, setFilterResult] = useState<boolean>(false);
+	const [filterTags, setFilterTags] = useState<string[]>([]);
 
 	useEffect(() => {
 		const fetchedData = async () => {
@@ -29,6 +30,9 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 					setAllProducts(data);
 					const likesArray = data.map((product) => product.likes);
 					setLikes(likesArray);
+					const tags = new Set(data.flatMap((product) => product.tag));
+					const tagsArray = Array.from(tags);
+					setFilterTags(tagsArray);
 				} else {
 					console.error("No data retrieved from getAll() function");
 				}
@@ -56,6 +60,7 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				setProductName,
 				productTags,
 				setProductTags,
+				filterTags,
 				productImageUrl,
 				setProductImageUrl,
 				productIsReviewed,
@@ -64,6 +69,7 @@ const MyProvider = ({ children }: { children: React.ReactNode }) => {
 				setAllProducts,
 				filterResult,
 				setFilterResult,
+				setFilterTags,
 			}}
 		>
 			{children}

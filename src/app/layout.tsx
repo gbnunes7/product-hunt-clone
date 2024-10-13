@@ -4,6 +4,8 @@ import logo from "./logo.png";
 import Header from "@/components/Header";
 import MyProvider from "@/context/mycontext";
 import { ClerkProvider } from "@clerk/nextjs";
+import { AnimatePresence } from "framer-motion";
+import MotionPage from "@/components/MotionPage";
 
 export const metadata: Metadata = {
 	title: "Product Hunt Clone",
@@ -21,8 +23,12 @@ export default function RootLayout({
 			<html lang="en">
 				<body className="flex flex-col min-h-screen">
 					<MyProvider>
-						<Header />
-						{children}
+						<AnimatePresence mode="wait">
+							<MotionPage>
+								<Header />
+								{children}
+							</MotionPage>
+						</AnimatePresence>
 					</MyProvider>
 				</body>
 			</html>

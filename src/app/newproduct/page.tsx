@@ -93,8 +93,10 @@ export default function NewProduct() {
 					minLength={3}
 					maxLength={50}
 					value={productTags}
-					onChange={(event) => setProductTags(event.target.value.split(","))}
-					placeholder="Enter the product tags here..."
+					onChange={(event) =>
+						setProductTags(event.target.value.replace(" ", ",").split(","))
+					}
+					placeholder="Enter the product tags here... Ex: tag1, tag2, tag3"
 					name="tags"
 					id="tags"
 					type="text"

@@ -94,7 +94,7 @@ export default function NewProduct() {
 					maxLength={50}
 					value={productTags}
 					onChange={(event) => setProductTags(event.target.value.split(","))}
-					placeholder="Enter the product tags here..."
+					placeholder="Enter the product tags here... Ex: tag1, tag2, tag3"
 					name="tags"
 					id="tags"
 					type="text"
